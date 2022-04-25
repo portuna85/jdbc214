@@ -1,10 +1,9 @@
-package hello.jdbc.Repository;
+package hello.jdbc.repository;
 
 import hello.jdbc.connection.DBConnectionUtil;
 import hello.jdbc.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.NoSuchElementException;
 
