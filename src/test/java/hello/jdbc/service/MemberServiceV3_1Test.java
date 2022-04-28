@@ -2,26 +2,35 @@ package hello.jdbc.service;
 
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepositoryV2;
+import hello.jdbc.repository.MemberRepositoryV3;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.PlatformTransactionManager;
+
 import java.sql.SQLException;
+
 import static hello.jdbc.connection.ConnectionConst.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 /**
- * 트랜잭션 - 커넥션 파라미터 전달 방식 동기화
+ * 트랜잭션 - 트랜젝션 메니저
  */
-public class MemberServiceV2Test {
-    private MemberRepositoryV2 memberRepository;
-    private MemberServiceV2 memberService;
+public class MemberServiceV3_1Test {
+    private MemberRepositoryV3 memberRepository;
+    private MemberServiceV3_1 memberService;
     @BeforeEach
     void before() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
-        memberRepository = new MemberRepositoryV2(dataSource);
-        memberService = new MemberServiceV2(dataSource, memberRepository);
+        memberRepository = new MemberRepositoryV3(dataSource);
+
+        PlatformTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager(dataSource);
+
+        memberService = new MemberServiceV3_1(dataSourceTransactionManager, memberRepository);
     }
 
     @AfterEach
@@ -60,8 +69,8 @@ public class MemberServiceV2Test {
         memberRepository.save(memberEx);
 
         //when
-        assertThatThrownBy(() ->
-                memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(), 2000))
+        assertThatThrownBy(() -> memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(),
+                        2000))
                 .isInstanceOf(IllegalStateException.class);
 
         //then
