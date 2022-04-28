@@ -60,13 +60,13 @@ public class MemberRepositoryV1 {
                 member.setMoney(rs.getInt("money"));
                 return member;
             } else {
-                throw new NoSuchElementException("member not found memberId = "+memberId);
+                throw new NoSuchElementException("member not found memberId = " + memberId);
             }
 
         } catch (SQLException e) {
             log.error("db error", e);
             throw e;
-        }finally {
+        } finally {
             close(con, pstmt, rs);
         }
     }
@@ -116,7 +116,6 @@ public class MemberRepositoryV1 {
         JdbcUtils.closeConnection(con);
         JdbcUtils.closeStatement(stmt);
     }
-
 
     private Connection getConnection() throws SQLException {
 

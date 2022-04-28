@@ -1,6 +1,5 @@
 package hello.jdbc.domain;
 
-import jdk.jfr.DataAmount;
 import lombok.Data;
 
 @Data
