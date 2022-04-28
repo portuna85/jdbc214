@@ -17,20 +17,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 트랜잭션 - 트랜젝션 메니저
+ * 트랜잭션 - 트랜젝션 템플릿
  */
-public class MemberServiceV3_1Test {
+public class MemberServiceV3_2Test {
     private MemberRepositoryV3 memberRepository;
-    private MemberServiceV3_1 memberService;
-
+    private MemberServiceV3_2 memberService;
     @BeforeEach
     void before() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
         memberRepository = new MemberRepositoryV3(dataSource);
 
-        PlatformTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager(dataSource);
+        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
 
-        memberService = new MemberServiceV3_1(dataSourceTransactionManager, memberRepository);
+        memberService = new MemberServiceV3_2(transactionManager, memberRepository);
     }
 
     @AfterEach
