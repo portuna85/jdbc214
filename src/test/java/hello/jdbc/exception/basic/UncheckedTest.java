@@ -45,6 +45,7 @@ public class UncheckedTest {
                 log.info("예외 처리, message = {}", e.getMessage(), e);
             }
         }
+
         public void callThrow() {
             repository.call();
         }
