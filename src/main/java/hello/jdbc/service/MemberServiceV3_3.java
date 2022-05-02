@@ -23,7 +23,6 @@ public class MemberServiceV3_3 {
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         //비즈니스 로직
         bizLogic(fromId, toId, money);
-
     }
 
     private void bizLogic(String fromId, String toId, int money) throws SQLException {

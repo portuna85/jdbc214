@@ -50,13 +50,13 @@ public class MemberRepositoryV0 {
                 member.setMoney(rs.getInt("money"));
                 return member;
             } else {
-                throw new NoSuchElementException("member not found memberId = "+memberId);
+                throw new NoSuchElementException("member not found memberId = " + memberId);
             }
 
         } catch (SQLException e) {
             log.error("db error", e);
             throw e;
-        }finally {
+        } finally {
             close(con, pstmt, rs);
         }
     }
@@ -126,7 +126,6 @@ public class MemberRepositoryV0 {
             }
         }
     }
-
 
 
     private Connection getConnection() {
