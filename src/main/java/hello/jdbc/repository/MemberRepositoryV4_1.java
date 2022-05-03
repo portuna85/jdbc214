@@ -10,9 +10,6 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.NoSuchElementException;
 
-/**
- * 트랜잭션 -
- */
 @Slf4j
 public class MemberRepositoryV4_1 implements MemberRepository {
     private final DataSource dataSource;

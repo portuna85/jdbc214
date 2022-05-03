@@ -5,14 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.support.JdbcUtils;
 
 import javax.sql.DataSource;
+import java.io.ObjectStreamClass;
 import java.sql.*;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * JDBC - DataSource 사용, JdbcUtils 사용
  */
 @Slf4j
-public class MemberRepositoryV1 {
+public class MemberRepositoryV1  {
 
     private final DataSource dataSource;
 
