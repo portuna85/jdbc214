@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 
 /**
- * SQLExceptionTranslator 추가
+ * JDBCTemplate 추가
  */
 @Slf4j
 public class MemberRepositoryV5 implements MemberRepository {
