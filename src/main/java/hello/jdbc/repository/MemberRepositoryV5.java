@@ -32,7 +32,7 @@ public class MemberRepositoryV5 implements MemberRepository {
     }
 
     private RowMapper<Member> memberRowMapper() {
-        return (rs, rowNum) ->{
+        return (rs, rowNum) -> {
             Member member = new Member();
             member.setMemberId(rs.getString("member_id"));
             member.setMoney(rs.getInt("money"));

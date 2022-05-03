@@ -29,14 +29,14 @@ public class SpringExceptionTranslatorTest {
 
     @Test
     void sqlExceptionErrorCode() {
-        String sql = "select **** dfs";
+        String sql = "SELECT bad grammer";
 
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.executeQuery();
         } catch (SQLException e) {
-            assertThat(e.getErrorCode()).isEqualTo(1064);
+            assertThat(e.getErrorCode()).isEqualTo(1054);
             int errorCode = e.getErrorCode();
             log.info("errorCode = {}", errorCode);
             log.info("error", e);
@@ -45,15 +45,16 @@ public class SpringExceptionTranslatorTest {
 
     @Test
     void exceptionTranslator() {
-        String sql = "SELECT * dsafsdfdf";
+        String sql = "SELECT bad grammer";
 
         try {
             Connection con = dataSource.getConnection();
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.executeQuery();
         } catch (SQLException e) {
-            assertThat(e.getErrorCode()).isEqualTo(1064);
+            assertThat(e.getErrorCode()).isEqualTo(1054);
             SQLErrorCodeSQLExceptionTranslator exTranslator = new SQLErrorCodeSQLExceptionTranslator();
+
             DataAccessException resultEx = exTranslator.translate("SELECT", sql, e);
             log.info("resultEx", resultEx);
             assertThat(resultEx.getClass()).isEqualTo(BadSqlGrammarException.class);
